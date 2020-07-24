@@ -281,8 +281,11 @@ git commit --amend
 \subsubsection{ブランチの削除} % (fold)
 \label{ssub:ブランチの削除}
 
+branchの削除の仕方については以下の２種類がある。\\
+元になっているブランチよりも新しいcommitがある場合には、dオプションではerrorを返す。
 \begin{commandshell}
-git branch -D [target branch] 
+git branch -d [target branch]
+git branch -D [target branch]   # by force
 \end{commandshell}
 
 % subsubsection ブランチの削除 (end)
