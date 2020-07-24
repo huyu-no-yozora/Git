@@ -273,9 +273,40 @@ Note that ...
 \subsubsection{コミットメッセージの変更} % (fold)
 \label{ssub:コミットメッセージの変更}
 
+直前のcommit messageを変更するには以下を実行すれば良い。
 \begin{commandshell}
 git commit --amend
 \end{commandshell}
+
+2つ以上前のcommit messageを変更する場合には以下のようになる。
+
+\begin{tcolorbox}[skin=enhanced,
+left=3mm,right=3mm,top=1mm,bottom=1mm, boxrule=1.0mm, 
+title=2つ以上前のcommit messageの変更, coltitle=black, fonttitle=\bfseries, 
+colback=SpringGreen!5!white,colframe=SpringGreen!70]
+n個前のcommit messageを変更したいとする。\\
+\\
+Step1. 変更対象のbranchにcheckoutし、以下を実行する
+\begin{commandshell}
+git rebase --interactive HEAD~n
+\end{commandshell}
+
+Step2. 変更したい対象のcommitのcommit idの隣の「pick」という文字を「edit」に書き換え
+最初のeditの部分に戻っているので、以下を実行する
+\begin{commandshell}
+git commit --amend
+\end{commandshell}
+
+Step3. commit messageを変更後、以下を実行する
+\begin{commandshell}
+git rebase --continue
+\end{commandshell}
+
+Step4. 以降、editに書き換えた部分に対し、Step2, Step3を繰り返す\\
+\\
+Step5. git logを実行し、変更が反映されていることを確認する
+\end{tcolorbox}
+
 
 % subsubsection コミットメッセージの変更 (end)
 \subsubsection{ブランチの削除} % (fold)
