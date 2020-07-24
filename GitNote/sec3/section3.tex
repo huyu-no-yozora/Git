@@ -129,14 +129,14 @@ git push origin [branch name]
 \subsection{その他の使用頻度の高いコマンド} % (fold)
 \label{sub:その他の使用頻度の高いコマンド}
 
-\subsubsection{リモートへの変更内容の反映} % (fold)
-\label{ssub:リモートへの変更内容の反映}
+\subsubsection{リモートの変更内容の反映} % (fold)
+\label{ssub:リモートの変更内容の反映}
 
 \begin{commandshell}
 git pull
 \end{commandshell}
 
-% subsubsection リモートへの変更内容の反映 (end)
+% subsubsection リモートの変更内容の反映 (end)
 \subsubsection{状態の確認} % (fold)
 \label{ssub:状態の確認}
 
@@ -200,11 +200,77 @@ git stash drop [stash@{stash[queue number]} or saved name]
 \subsubsection{Rebase} % (fold)
 \label{ssub:rebase}
 
+
+
 feature/exampleブランチをdevelopブランチに追従させる場合
+\begin{filecontents}{rebase_before.txt}
+* cfb44f5 (HEAD -> develop) add description about hunk
+* 69119b1 add description of some useful command
+| * be8634b (feature/example) add description about how to delete a branch
+| * e5ad949 change a subsubsection name
+|/  
+* 561e128 add a Contents table
+* 18d3438 (master) initial code was putted
+\end{filecontents}
+
+\begin{tikzpicture}
+\tikzstyle{commit}=[draw,circle,fill=white,inner sep=0pt,minimum size=5pt]
+\tikzstyle{clabel}=[right,outer sep=1em]
+\tikzstyle{every path}=[draw]
+\matrix [column sep={1em,between origins},row sep=\lineskip]
+{
+\commit{cfb44f5}{(develop) add description about hunk} & \\
+\commit{69119b1}{add description of some useful command} & \\
+  & \commit{be8634b}{(feature/example) add description about how to delete a branch} \\
+  & \commit{e5ad949}{change a subsubsection name} \\
+\commit{561e128}{add a Contents table} & \\
+\commit{18d3438}{(master) initial code was putted} & \\
+};
+\connect{18d3438}{561e128};
+\connect{561e128}{69119b1};
+\connect{69119b1}{cfb44f5};
+\connect{561e128}{e5ad949};
+\connect{e5ad949}{be8634b};
+\end{tikzpicture}
+
+
+以下を実行する。
 \begin{commandshell}
 git checkout feature/example
 git rebase develop 
 \end{commandshell}
+
+
+\begin{filecontents}{rebase_after.txt}
+  * ef963ca (HEAD -> feature/example) add description about how to delete a branch
+  * bfb0835 change a subsubsection name
+ /  
+* cfb44f5 (develop) add description about hunk
+* 69119b1 add description of some useful command
+* 561e128 add a Contents table
+* 18d3438 (master) initial code was putted
+\end{filecontents}
+
+\begin{tikzpicture}
+\tikzstyle{commit}=[draw,circle,fill=white,inner sep=0pt,minimum size=5pt]
+\tikzstyle{clabel}=[right,outer sep=1em]
+\tikzstyle{every path}=[draw]
+\matrix [column sep={1em,between origins},row sep=\lineskip]
+{
+  & \commit{ef963ca}{(HEAD -> feature/example) add description about how to delete a branch} \\
+  & \commit{bfb0835}{change a subsubsection name} \\
+\commit{cfb44f5}{(develop) add description about hunk} & \\
+\commit{69119b1}{add description of some useful command} & \\
+\commit{561e128}{add a Contents table} & \\
+\commit{18d3438}{(master) initial code was putted} & \\
+};
+\connect{18d3438}{561e128};
+\connect{561e128}{69119b1};
+\connect{69119b1}{cfb44f5};
+\connect{cfb44f5}{bfb0835};
+\connect{bfb0835}{ef963ca};
+\end{tikzpicture}
+
 
 % subsubsection rebase (end)
 \subsubsection{Merge} % (fold)
@@ -270,19 +336,53 @@ Note that ...
 \end{oceanbox}
 
 % subsubsection merge (end)
-\subsubsection{直前のコミットメッセージを変更する} % (fold)
-\label{ssub:直前のコミットメッセージを変更する}
+\subsubsection{コミットメッセージの変更} % (fold)
+\label{ssub:コミットメッセージの変更}
 
+直前のcommit messageを変更するには以下を実行すれば良い。
 \begin{commandshell}
 git commit --amend
 \end{commandshell}
 
-% subsubsection 直前のコミットメッセージを変更する (end)
+2つ以上前のcommit messageを変更する場合には以下のようになる。
+
+\begin{tcolorbox}[skin=enhanced,
+left=3mm,right=3mm,top=1mm,bottom=1mm, boxrule=1.0mm, 
+title=2つ以上前のcommit messageの変更, coltitle=black, fonttitle=\bfseries, 
+colback=SpringGreen!5!white,colframe=SpringGreen!70]
+n個前のcommit messageを変更したいとする。\\
+\\
+Step1. 変更対象のbranchにcheckoutし、以下を実行する
+\begin{commandshell}
+git rebase --interactive HEAD~n
+\end{commandshell}
+
+Step2. 変更したい対象のcommitのcommit idの隣の「pick」という文字を「edit」に書き換え
+最初のeditの部分に戻っているので、以下を実行する
+\begin{commandshell}
+git commit --amend
+\end{commandshell}
+
+Step3. commit messageを変更後、以下を実行する
+\begin{commandshell}
+git rebase --continue
+\end{commandshell}
+
+Step4. 以降、editに書き換えた部分に対し、Step2, Step3を繰り返す\\
+\\
+Step5. git logを実行し、変更が反映されていることを確認する
+\end{tcolorbox}
+
+
+% subsubsection コミットメッセージの変更 (end)
 \subsubsection{ブランチの削除} % (fold)
 \label{ssub:ブランチの削除}
 
+branchの削除の仕方については以下の２種類がある。\\
+元になっているブランチよりも新しいcommitがある場合には、dオプションではerrorを返す。
 \begin{commandshell}
-git branch -D [target branch] 
+git branch -d [target branch]
+git branch -D [target branch]   # by force
 \end{commandshell}
 
 % subsubsection ブランチの削除 (end)
