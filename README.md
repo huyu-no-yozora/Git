@@ -1,2 +1,10 @@
 # Git
-repository for knowledge accumulation about the Git
+
+## Contents
+| item      | explanation            |
+| --------- | ---------------------- |
+| README.md | Guide this documents   |
+| Git Note/ | An Introduction to Git |
+
+
+
