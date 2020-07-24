@@ -76,6 +76,13 @@ prefixオプションで、展開後のディレクトリを指定できる。
 \subsection{hunk単位でのオペレーション} % (fold)
 \label{sub:hunk単位でのオペレーション}
 
+\begin{tcolorbox}[title=hunkとは, fonttitle=\bfseries]
+管理対象のファイルに対し、Gitはブロック単位でコードを認識している。
+hunkとは、コード内におけるGitが認識するブロックのことである。
+\end{tcolorbox}
+
+以下ではhunk単位での扱いについて記載する。
+
 hunk単位でのindexへの登録
 \begin{commandshell}
 git add -p
