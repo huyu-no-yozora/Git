@@ -1,0 +1,33 @@
+\documentclass[10pt,a4j,openany,dvipdfmx]{jsarticle}
+\usepackage{docmute} %inputコマンドを使うためのパッケージ
+\input{preamble}
+\usepackage{lipsum}
+
+
+\title{{\it Git Note}}
+\author{{\it huyu-no-yozora }\\冬ノ夜空}
+\date{\todaye}
+
+\begin{document}
+\maketitle
+
+%目次作成
+\tableofcontents
+
+\newpage
+
+\input{./intro/Introduction}
+\input{./notation/Notation}
+\newpage
+
+\input{./sec1/section1}
+\input{./sec2/section2}
+\input{./sec3/section3}
+\input{./sec4/section4}
+
+%参考文献
+\bibliography{./ref/reference}
+
+\end{document}
+
+

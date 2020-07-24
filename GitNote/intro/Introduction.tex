@@ -1,0 +1,28 @@
+\documentclass[11pt,a4paper,openany,dvipdfmx]{jsarticle}
+\usepackage{docmute} %inputコマンドを使うためのパッケージ
+\input{preamble}
+
+\begin{document}
+\section*{\it {～\ Introduction\ ～}}
+\addcontentsline{toc}{section}{\it {～\ Introduction\ ～}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% document全体に適応
+% \CenterWallPaper{scaling}{filename}
+% 単一ページのみ適応
+% \ThisCenterWallPaper{scaling}{filename}
+
+
+\ThisCenterWallPaper{1}{./figure/intro.png}
+% \ThisLRCornerWallPaper{1}{./figure/colorful.png}
+
+Gitとは、一言で言えば\textcolor{RoyalBlue}{ ファイル群のバージョン管理を行うための仕組み }である。
+Linuxの生みの親であるLinus Torvalsによって作成された。現在でも、日々アップデートが続いている。
+現在では、主に、プログラムの開発者が共同でコーディングを行い開発作業を安定して進める際に使用される。
+このドキュメントでは、Gitの使い方を簡単に学ぶためのガイド的な立ち位置のもとに、Gitを使用するための基礎的な事項についてのみ記載する。
+Gitの便利なコマンドやより深い内容などといった、より詳細なインフォメーションは、公式ドキュメントや本などで学習すると良いだろう。
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

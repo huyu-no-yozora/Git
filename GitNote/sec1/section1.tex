@@ -1,0 +1,84 @@
+\documentclass[11pt,a4paper,openany,dvipdfmx]{jsarticle}
+\usepackage{docmute} %inputコマンドを使うためのパッケージ
+\input{preamble}
+
+\begin{document}
+
+% \section*{secname}
+% \addcontentsline{toc}{section}{secname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%section%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Gitとは}
+
+%@ Git =====================================================%
+\subsection{Gitとは} % (fold)
+\label{sub:gitとは}
+
+\begin{tcolorbox}[enhanced,colback=gray!5!white,
+title=Gitについて,coltitle=black,fonttitle=\bfseries,
+frame style image=blueshade.png,
+overlay={\begin{tcbcliptitle}\node at (title)
+{\includegraphics[width=\linewidth]{./figure/beautiful_flower.png}};\end{tcbcliptitle}},
+watermark opacity=0.1, watermark text app=Git, watermark color=Gray, watermark zoom=0.5]
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.\ (Git\ HP)
+\tcblower
+HP:\ \url{https://git-scm.com/}
+\end{tcolorbox}
+
+% subsection gitとは (end)
+%@ Git =====================================================%
+
+%@ 環境設定 =================================================%
+\subsection{環境設定} % (fold)
+\label{sub:環境設定}
+
+
+システムへのインストール後、以下コマンドを実行する。\\
+
+global設定
+\begin{commandshell}
+git config --global user.name "[your name]"
+git config --global user.email "[your email address]"
+\end{commandshell}
+
+なお、特定のrepositoryにのみ別の設定を反映したい場合には、以下のコマンドを実行する。
+\begin{commandshell}
+cd "[path to a local repository]"
+git config --local user.name "[your name]"
+git config --local user.email "[your email address]"
+\end{commandshell}
+
+
+% subsection 環境設定 (end)
+%@ 環境設定 =================================================%
+
+%@ GitHub ==================================================%
+\subsection{関連サービス} % (fold)
+\label{sub:関連サービス}
+
+
+\begin{picturebox}[title=GitHubについて]{./figure/universe.jpg}
+GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.\\
+HP:\ \url{https://github.com/}
+\tcblower
+GitHub Offical: Feature\\
+\url{https://github.com/features}
+\end{picturebox}
+
+一言で言えば
+\begin{tcolorbox}[enhanced, fuzzy halo=0.5mm with Gray, frame style image=blueshade.png]
+ソースコードをリモートに保存し、必要に応じて公開することができるサービス
+\end{tcolorbox}
+である。CI/CDを組んだりできるようになったことから、インフラ基盤として利用されることも多い。
+
+
+GitHubのチュートリアル\\
+\url{https://guides.github.com/activities/hello-world/}
+
+
+% subsection 関連サービス (end)
+%@ GitHub ==================================================%
+
+\end{document}
+
+

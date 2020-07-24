@@ -1,0 +1,142 @@
+\documentclass[11pt,a4paper,openany,dvipdfmx]{jsarticle}
+\usepackage{docmute} %inputコマンドを使うためのパッケージ
+\input{preamble}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%section%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{基礎概念} % (fold)
+\label{sec:基礎概念}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{バージョン管理システム共通概念} % (fold)
+\label{sub:バージョン管理システム共通概念}
+
+
+
+% subsection バージョン管理システム共通概念 (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Git独自の概念} % (fold)
+\label{sub:git独自の概念}
+
+ローカルリポジトリ上の
+
+
+% subsection git独自の概念 (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{repository} % (fold)
+\label{sub:repository}
+
+
+\begin{tcolorbox}[
+title=repositoryについて, fonttitle=\bfseries]
+repositoryは、
+\end{tcolorbox}
+
+ローカルリポジトリの中身のファイル群
+\begin{blueitemize}
+  \item \textcolor{Red}{\textbtt{.git}}：git repositoryに関する設定ファイル等が格納されたディレクトリ
+  \item \textbtt{README.md}
+  \item \textbtt{ソースコード}
+\end{blueitemize}
+
+
+% subsection repository (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{branch} % (fold)
+\label{sub:branch}
+ブランチとは、
+
+\begin{tcolorbox}[
+title=branchについて, fonttitle=\bfseries]
+ブランチは、
+\tcblower
+HP:\ \url{https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell}
+\end{tcolorbox}
+
+\begin{oceanbox}{branchの種類}
+branchには大きく、local branch, remote-tracking branch, remote branchの３種がある。
+\end{oceanbox}
+
+
+ブランチの種類
+\begin{tcolorbox}[colframe=Cyan]
+  \begin{multicols}{2}
+    \begin{itemize}
+        \item \textbtt{master}
+        \item \textbtt{develop}
+        \item \textbtt{feature}
+        \item \textbtt{hotfix}
+        \item \textbtt{release}
+    \end{itemize}
+  \end{multicols}
+\end{tcolorbox}
+
+
+\textbtt{remote branch}
+\begin{ColorReferenceBox}{red}
+3.5 Git Branching - Remote Branches\\
+\url{https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches}\\
+\\
+Remote references are references (pointers) in your remote repositories, including branches, tags, and so on. You can get a full list of remote references explicitly with git ls-remote <remote>, or git remote show <remote> for remote branches as well as more information. Nevertheless, a more common way is to take advantage of remote-tracking branches.\\
+\\
+Remote-tracking branches are references to the state of remote branches. They’re local references that you can’t move; Git moves them for you whenever you do any network communication, to make sure they accurately represent the state of the remote repository. Think of them as bookmarks, to remind you where the branches in your remote repositories were the last time you connected to them.\\
+\end{ColorReferenceBox}
+
+\textbtt{remote-tracking branch}
+\begin{ColorReferenceBox}{red}
+3.5 Git Branching - Remote Branches\\
+\textbtt{Tracking Branches}\\
+Checking out a local branch from a remote-tracking branch automatically creates what is called a “tracking branch” (and the branch it tracks is called an “upstream branch”). Tracking branches are local branches that have a direct relationship to a remote branch. If you’re on a tracking branch and type git pull, Git automatically knows which server to fetch from and which branch to merge in.\\
+\\
+% When you clone a repository, it generally automatically creates a master branch that tracks origin/master. However, you can set up other tracking branches if you wish ハイフン ones that track branches on other remotes, or don’t track the master branch. 
+... The simple case is the example you just saw, running \commandbox{git checkout -b <branch> <remote>/<branch>}. This is a common enough operation that Git provides the  \commandbox{--track} shorthand:
+\begin{onecommandshell}
+$ git checkout --track origin/serverfix
+Branch serverfix set up to track remote branch serverfix from origin.
+Switched to a new branch 'serverfix'
+\end{onecommandshell}
+\end{ColorReferenceBox}
+
+
+\begin{tcolorbox}[enhanced,frame style image=blueshade.png,
+opacityback=0.75,opacitybacktitle=0.25,
+colback=blue!5!white,colframe=blue!75!black,
+boxrule=1.0mm, title=上流ブランチ/下流ブランチ]
+upstream branch(上流ブランチ)とは、リモート側との〜。\par
+Title and interior are made partly transparent to show the image.
+\end{tcolorbox}
+
+
+上流ブランチの確認
+\begin{commandshell}
+git branch -vv
+\end{commandshell}
+
+上流ブランチを登録しつつ、リモートリポジトリへpush
+\begin{commandshell}
+git push --set-upstream origin feature/exampleBranch
+\end{commandshell}
+
+
+% subsection branch (end)branchとは
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{index} % (fold)
+\label{sub:index}
+
+\begin{tcolorbox}[enhanced,title=indexとは,watermark graphics=./figure/clock.jpg,
+watermark opacity=0.1,watermark text app=Git ,watermark color=Gray]
+インデックスとは、
+\end{tcolorbox}
+
+% subsection index (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% section 基礎概念 (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%section%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+

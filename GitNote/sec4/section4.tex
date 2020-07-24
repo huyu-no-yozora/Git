@@ -1,0 +1,86 @@
+\documentclass[10pt,a4j,openany,dvipdfmx]{jsarticle}
+\usepackage{docmute} %inputコマンドを使うためのパッケージ
+\input{preamble}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%section%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Deep Dive} % (fold)
+\label{sec:Deep Dive}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{役に立つコマンド} % (fold)
+\label{sub:役に立つコマンド}
+
+
+\subsubsection{cherry-pick} % (fold)
+\label{ssub:cherry_pick}
+
+cherry-pick: \url{https://git-scm.com/docs/git-cherry-pick}
+
+% subsubsection cherry_pick (end)
+
+
+% subsection 役に立つコマンド (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{もっと学びたい方へ} % (fold)
+\label{sub:もっと学びたい方へ}
+
+
+\begin{skybox}{Git Branch Model}
+Git Branch Modelというものを学習すると良いだろう。
+Git-Flow, GitHub-Flowなどが存在する。
+\tcblower
+\url{https://nvie.com/posts/a-successful-git-branching-model/}
+\end{skybox}
+
+
+% subsection もっと学びたい方へ (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\tcbset{gitexample/.style={listing and comment,comment={#1},
+skin=bicolor,boxrule=1mm,fonttitle=\bfseries,coltitle=black,
+frame style={draw=black,left color=Gold,right color=Goldenrod!50!Gold},
+colback=black,colbacklower=Goldenrod!75!Gold,
+colupper=white,collower=black,
+listing options={language={bash},aboveskip=0pt,belowskip=0pt,nolol,
+basicstyle=\ttfamily\bfseries,extendedchars=true}}}
+\begin{tcblisting}{title={Snapshot of the staging area},
+gitexample={The option '-a' automatically stages all tracked and modified
+files before the commit.\par
+This can be combined with the message option '-m'
+as seen in the third line.}}
+git commit
+git commit -a
+git commit -am 'changes to my example'
+\end{tcblisting}
+
+
+\begin{myfilebox}[colbacktitle=RoyalBlue]{My title}
+\lipsum[2]
+\end{myfilebox}
+
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|} \hline
+      parameter name & meaning\\ \hline \hline
+      xlon & longitude\\
+      xlat & latitude\\
+      ght  & geopotential height\\
+      prs  & pressure\\
+      www  & \\
+      qvp  & qv\\
+      rhu  & relative humidity\\ 
+      eth  & equivalent potential temperature\\ \hline
+  \end{tabular}
+\end{table}
+
+
+% section Deep Dive (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%section%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+

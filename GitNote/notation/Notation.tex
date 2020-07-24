@@ -1,0 +1,48 @@
+\documentclass[11pt,a4paper,openany,dvipdfmx]{jsarticle}
+\input{preamble}
+
+\begin{document}
+% addcontentsline{<list_type>}{<type>}{<text>}
+%% <list_type>
+%% toc ：　目次（table of contents）
+%% lof ：　図一覧（list of figures）
+%% lot ：　表一覧（list of tables）
+%% <type>
+%% toc ：　利用しているクラスファイルに従い、chapter、section、subsectionなど
+%% lof ：　figure
+%% lot ：　table
+%% text
+%% <text>　fileに入れたい文字
+\section*{\it {～\ Notation }\rm{\&}\it{ Assumption\ ～}}
+\addcontentsline{toc}{section}{\it {～\ Notation }\rm{\&}\it{ Assumption\ ～}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Notationに関する取り決めを先に明記しておく。
+\\
+\\
+\underline{ユーザープロンプトについてのnotation
+\footnote{使用しているLinux\ Distributionによっては記号が違うことがある。}
+}\\
+\ilterm{\# command}\ :\ \ super\ \ user での実行\\
+\ilterm{\$ command}\ :\ normal\ userでの実行\\
+\ilterm{\ \ command}\ :\ どちらでも良い\ or\ softwareやインストール場所によって各々で判断
+\\
+\\
+\underline{.[拡張子]等のnotation}\\
+言わずとも分かるとは思うが、これらの場合の[]はそれぞれの環境等を考慮したうえで各々で臨機応変に対応せよということである。\newline
+
+想定する読者としては、以下のような方を対象とする。
+\begin{itemize}
+	\item バージョン管理システムとしてのGitに興味があるが馴染みがない方
+	\item これから業務でGitを使用しなければならない方
+	\item 初めて学ぶ方
+	\item Gitの学習の仕方がわからないと悩んでいる方
+\end{itemize}
+
+
+このドキュメントでは主に、チームでの開発作業をできるようになることを目標とする。
+そのため、\textcolor{red}{ リモートリポジトリを利用する想定 }のもとに記述を行っていくものとする。
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
