@@ -108,7 +108,7 @@ Git-Flow, GitHub-Flowなどが存在する。
 \url{https://nvie.com/posts/a-successful-git-branching-model/}
 \end{skybox}
 
-\begin{redbox}
+\begin{redbox}{ProGit}
 ProGitという本がGit本家から出ているので、より詳しく学びたい場合は一読すると良いだろう。
 \tcblower
 Git HP: \url{https://git-scm.com/book/en/v2}
@@ -118,45 +118,6 @@ GitHub: \url{https://github.com/progit/}
 
 % subsection もっと学びたい方へ (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\tcbset{gitexample/.style={listing and comment,comment={#1},
-skin=bicolor,boxrule=1mm,fonttitle=\bfseries,coltitle=black,
-frame style={draw=black,left color=Gold,right color=Goldenrod!50!Gold},
-colback=black,colbacklower=Goldenrod!75!Gold,
-colupper=white,collower=black,
-listing options={language={bash},aboveskip=0pt,belowskip=0pt,nolol,
-basicstyle=\ttfamily\bfseries,extendedchars=true}}}
-\begin{tcblisting}{title={Snapshot of the staging area},
-gitexample={The option '-a' automatically stages all tracked and modified
-files before the commit.\par
-This can be combined with the message option '-m'
-as seen in the third line.}}
-git commit
-git commit -a
-git commit -am 'changes to my example'
-\end{tcblisting}
-
-
-\begin{myfilebox}[colbacktitle=RoyalBlue]{My title}
-\lipsum[2]
-\end{myfilebox}
-
-
-\begin{table}[H]
-  \centering
-  \begin{tabular}{|c|c|} \hline
-      parameter name & meaning\\ \hline \hline
-      xlon & longitude\\
-      xlat & latitude\\
-      ght  & geopotential height\\
-      prs  & pressure\\
-      www  & \\
-      qvp  & qv\\
-      rhu  & relative humidity\\ 
-      eth  & equivalent potential temperature\\ \hline
-  \end{tabular}
-\end{table}
 
 
 % section Deep Dive (end)
