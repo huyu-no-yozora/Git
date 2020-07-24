@@ -17,10 +17,76 @@
 \subsubsection{cherry-pick} % (fold)
 \label{ssub:cherry_pick}
 
+他のブランチなどにあるcommitも取り込むことができる。\\
+取り込みたいbranchにcheckoutし、その後、取り込みたいcommit idを羅列するだけで良い。
+\begin{commandshell}
+git checkout [target branch]
+git cherry-pick [target commit 1] [target commit 2] ...
+\end{commandshell}
+
+詳細は以下を参照。
 cherry-pick: \url{https://git-scm.com/docs/git-cherry-pick}
 
 % subsubsection cherry_pick (end)
+\subsubsection{tag} % (fold)
+\label{ssub:tag}
 
+特定のcommitに対してv1.0というタグをつけたい場合は以下のように実行する。
+\begin{commandshell}
+git tag v1.0 [target commit id]
+git tag -m "version 1.0" v1.0 [target commit id]   # with a comment
+\end{commandshell}
+
+現在のタグを確認する場合は、以下を実行すれば良い。
+\begin{commandshell}
+git tag
+\end{commandshell}
+
+詳細は、以下を参照。
+tag: \url{https://git-scm.com/book/en/v2/Git-Basics-Tagging}
+
+% subsubsection tag (end)
+\subsubsection{show} % (fold)
+\label{ssub:show}
+
+特定のcommitの変更内容を表示できる。最新のcommitの変更内容を表示するには以下を実行する。
+\begin{commandshell}
+git show HEAD
+\end{commandshell}
+
+% subsubsection show (end)
+\subsubsection{clean} % (fold)
+\label{ssub:clean}
+
+\begin{commandshell}
+git clean -n
+git clean -f 
+\end{commandshell}
+
+% subsubsection clean (end)
+\subsubsection{archive} % (fold)
+\label{ssub:archive}
+
+\$ git archive --format=tar --prefix=[directory name] HEAD | \
+gzip > [directory path]/[file name].tar.gz
+
+prefixオプションで、展開後のディレクトリを指定できる。
+
+% subsubsection archive (end)
+\subsection{hunk単位でのオペレーション} % (fold)
+\label{sub:hunk単位でのオペレーション}
+
+hunk単位でのindexへの登録
+\begin{commandshell}
+git add -p
+\end{commandshell}
+
+hunk単位でのcommit
+\begin{commandshell}
+git commit --interactive
+\end{commandshell}
+
+% subsection hunk単位でのオペレーション (end)
 
 % subsection 役に立つコマンド (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -34,6 +100,13 @@ Git-Flow, GitHub-Flowなどが存在する。
 \tcblower
 \url{https://nvie.com/posts/a-successful-git-branching-model/}
 \end{skybox}
+
+\begin{redbox}
+ProGitという本がGit本家から出ているので、より詳しく学びたい場合は一読すると良いだろう。
+\tcblower
+Git HP: \url{https://git-scm.com/book/en/v2}
+GitHub: \url{https://github.com/progit/}
+\end{redbox}
 
 
 % subsection もっと学びたい方へ (end)
