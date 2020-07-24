@@ -200,11 +200,77 @@ git stash drop [stash@{stash[queue number]} or saved name]
 \subsubsection{Rebase} % (fold)
 \label{ssub:rebase}
 
+
+
 feature/exampleブランチをdevelopブランチに追従させる場合
+\begin{filecontents}{rebase_before.txt}
+* cfb44f5 (HEAD -> develop) add description about hunk
+* 69119b1 add description of some useful command
+| * be8634b (feature/example) add description about how to delete a branch
+| * e5ad949 change a subsubsection name
+|/  
+* 561e128 add a Contents table
+* 18d3438 (master) initial code was putted
+\end{filecontents}
+
+\begin{tikzpicture}
+\tikzstyle{commit}=[draw,circle,fill=white,inner sep=0pt,minimum size=5pt]
+\tikzstyle{clabel}=[right,outer sep=1em]
+\tikzstyle{every path}=[draw]
+\matrix [column sep={1em,between origins},row sep=\lineskip]
+{
+\commit{cfb44f5}{(develop) add description about hunk} & \\
+\commit{69119b1}{add description of some useful command} & \\
+  & \commit{be8634b}{(feature/example) add description about how to delete a branch} \\
+  & \commit{e5ad949}{change a subsubsection name} \\
+\commit{561e128}{add a Contents table} & \\
+\commit{18d3438}{(master) initial code was putted} & \\
+};
+\connect{18d3438}{561e128};
+\connect{561e128}{69119b1};
+\connect{69119b1}{cfb44f5};
+\connect{561e128}{e5ad949};
+\connect{e5ad949}{be8634b};
+\end{tikzpicture}
+
+
+以下を実行する。
 \begin{commandshell}
 git checkout feature/example
 git rebase develop 
 \end{commandshell}
+
+
+\begin{filecontents}{rebase_after.txt}
+  * ef963ca (HEAD -> feature/example) add description about how to delete a branch
+  * bfb0835 change a subsubsection name
+ /  
+* cfb44f5 (develop) add description about hunk
+* 69119b1 add description of some useful command
+* 561e128 add a Contents table
+* 18d3438 (master) initial code was putted
+\end{filecontents}
+
+\begin{tikzpicture}
+\tikzstyle{commit}=[draw,circle,fill=white,inner sep=0pt,minimum size=5pt]
+\tikzstyle{clabel}=[right,outer sep=1em]
+\tikzstyle{every path}=[draw]
+\matrix [column sep={1em,between origins},row sep=\lineskip]
+{
+  & \commit{ef963ca}{(HEAD -> feature/example) add description about how to delete a branch} \\
+  & \commit{bfb0835}{change a subsubsection name} \\
+\commit{cfb44f5}{(develop) add description about hunk} & \\
+\commit{69119b1}{add description of some useful command} & \\
+\commit{561e128}{add a Contents table} & \\
+\commit{18d3438}{(master) initial code was putted} & \\
+};
+\connect{18d3438}{561e128};
+\connect{561e128}{69119b1};
+\connect{69119b1}{cfb44f5};
+\connect{cfb44f5}{bfb0835};
+\connect{bfb0835}{ef963ca};
+\end{tikzpicture}
+
 
 % subsubsection rebase (end)
 \subsubsection{Merge} % (fold)
