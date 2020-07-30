@@ -13,13 +13,12 @@
 \subsection{branchの作成とcheckout} % (fold)
 \label{sub:branchの作成とcheckout}
 
-\begin{redbox}{checkout}
+\begin{tcolorbox}[
+title=checkout, fonttitle=\bfseries]
 checkoutとは、作業フォルダの状態を特定のsave point(commit)の状態に復元することである。
 checkoutを実行することにより、repositoryから、branchのデータをindexおよびworking treeに展開される。\\
 (基本的にはbranchに対してcheckoutを行うことが多い。)
-\tcblower
-どこにcheckoutしているのか知るために、以下の環境変数を変更しておくと良いかもしれない。
-\end{redbox}
+\end{tcolorbox}
 
 まず、以下コマンドでbranchを作成する。
 \begin{commandshell}
@@ -36,6 +35,26 @@ git checkout [branch name]
 \begin{commandshell}
 git checkout -b [branch name]
 \end{commandshell}
+
+ここでは、developブランチを作成し、checkoutすることにする。
+\begin{commandshell}
+git branch develop
+git checkout develop
+\end{commandshell}
+
+\begin{redbox}{Column: Gitのcurrent branchを表示させる}
+どこにcheckoutしているのか知るために、以下の環境変数を変更しておくと良いかもしれない。\\
+シェル起動スクリプト(login script: $\sim$/.bash\_profile等) に以下を設定。\footnote{ここでは、Mac, Linux, RHEL等を想定しかつ、デフォルトシェルとしてbashの利用を想定。}
+\begin{tcblisting}{skin=enhanced, sharp corners, boxrule=0.1mm, 
+%title=$\sim$/.bash\_profile, colbacktitle=DarkRed, opacitybacktitle=0.5, 
+%, boxed title style={size=minimal}, attach boxed title to bottom*, 
+colupper=white, colback=gentooblack, colframe=DarkRed, 
+listing only, listing options={language=sh,columns=fullflexible,keywordstyle=\color{red}}
+}
+PS1="[\u@\h \[\033[32m\]\W\[\033[00m\]]\[\033[35m\]\$(parse_git_branch)\[\033[00m\]\\$ "
+export PS1
+\end{tcblisting}
+\end{redbox}
 
 % subsection branchの作成とcheckout (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -90,7 +109,21 @@ int main() {
 git add .
 \end{commandshell}
 
-以下のように編集したとする。
+
+※
+
+
+% subsubsection step1_add_indexに登録する (end)
+\subsubsection{Step2. commit - indexに変更を反映する} % (fold)
+\label{ssub:step2_commit_indexに変更を反映する}
+
+変更内容をindexに反映（保存）するには、以下のようなコマンドを使用する。
+\begin{commandshell}
+git commit -m "[comment]"
+\end{commandshell}
+
+ここでは、 \commandbox{\$ git commit -m "initial commit"} として一度commitしたとしよう。\\
+その後、以下のように編集したとする。
 \begin{numList}{c}
 #include <stdio.h>
 int main() {
@@ -100,28 +133,27 @@ int main() {
 }
 \end{numList}
 
-再度\commandbox{git add .}を実行し、indexに追加する。
-
-
-% subsubsection step1_add_indexに登録する (end)
-\subsubsection{Step2. commit - indexに変更を反映する} % (fold)
-\label{ssub:step2_commit_indexに変更を反映する}
-
-以下コマンドを実行し、変更内容をindexに反映（保存）する。
-\begin{commandshell}
-git commit -m "[comment]"
-\end{commandshell}
-
-リモートに反映させたい修正の範囲になるまで、Step1, Step2を繰り返す。
+再度 \commandbox{git add .} を実行し、indexに追加し、その後、再度commitを行う。
+その際、修正内容をコメントとしてつけてcommitを行う。
+ここでは、\commandbox{git commit -m "change print message"}としてcommitしておこう。\\
+\\
+\textbtt{\uline{リモートに反映させたい修正の範囲になるまで、Step1, Step2を繰り返す。}}
 
 % subsubsection step2_commit_indexに変更を反映する (end)
 \subsubsection{Step3. push - リモートへの変更内容の送信} % (fold)
 \label{ssub:step3_push_リモートへの変更内容の送信}
 
-以下コマンドを実行し、リモートに変更内容を送信する。
+リモートに変更内容を送信するには、以下のコマンドを実行する。
 \begin{commandshell}
 git push origin [branch name]
 \end{commandshell}
+
+ここでは、リモートリポジトリにdevelopブランチをpushするとしよう。
+\commandbox{git push origin develop}
+
+異なるbranch名でpushする場合\\
+git push origin [local branch name]:[remote branch name]
+
 
 % subsubsection step3_push_リモートへの変更内容の送信 (end)
 
