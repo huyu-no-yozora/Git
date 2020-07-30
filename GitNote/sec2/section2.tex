@@ -10,20 +10,30 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{バージョン管理システム共通概念} % (fold)
-\label{sub:バージョン管理システム共通概念}
+\subsection{バージョン管理システム共通概念とGit独自の概念} % (fold)
+\label{sub:バージョン管理システム共通概念とGit独自の概念}
 
+\subsubsection{共通概念} % (fold)
+\label{ssub:共通概念}
 
+\begin{itemize}
+  \item repository
+  \item commit
+  \item working tree
+  \item branch
+  \item checkout
+\end{itemize}
 
-% subsection バージョン管理システム共通概念 (end)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Git独自の概念} % (fold)
-\label{sub:git独自の概念}
+% subsubsection 共通概念 (end)
+\subsubsection{Git独自の概念} % (fold)
+\label{ssub:git独自の概念}
 
-ローカルリポジトリ上の
+Gitの場合、working treeとrepositoryの間に、indexが存在する。
+これを利用して、ファイルの一部分のみをindexに登録し、commitできるというメリットがある。(\ref{sub:hunk単位でのオペレーション} を参照。)
 
+% subsubsection git独自の概念 (end)
 
-% subsection git独自の概念 (end)
+% subsection バージョン管理システム共通概念とGit独自の概念 (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{repository} % (fold)
 \label{sub:repository}
@@ -31,7 +41,7 @@
 
 \begin{tcolorbox}[
 title=repositoryについて, fonttitle=\bfseries]
-repositoryは、
+repositoryとは、管理したいソースコードファイルおよびその履歴の保管庫のことである。
 \end{tcolorbox}
 
 ローカルリポジトリの中身のファイル群
@@ -44,34 +54,71 @@ repositoryは、
 
 % subsection repository (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{working tree} % (fold)
+\label{sub:working_tree}
+
+\begin{tcolorbox}[
+title=working treeについて, fonttitle=\bfseries]
+working treeとは、local repositoryにおいて、repositoryから取り出す際に展開されるための場所のこと。
+local repositoryにおいては、.gitディレクトリが存在するディレクトリのことを指す。
+ユーザはworking tree内で作業を行い、アップデート/修正の内容をrepositoryに反映していく。
+\end{tcolorbox}
+
+% subsection working_tree (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{commit} % (fold)
+\label{sub:commit}
+
+\begin{tcolorbox}[
+title=commitについて, fonttitle=\bfseries]
+commitとは、repositoryに修正内容を反映していくオペレーション、また、それによってrepositoryへ反映された履歴のことを指す。
+\end{tcolorbox}
+
+% subsection commit (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{branch} % (fold)
 \label{sub:branch}
-ブランチとは、
+
+\subsubsection{What is branch?} % (fold)
+\label{ssub:what_is_branch_}
 
 \begin{tcolorbox}[
 title=branchについて, fonttitle=\bfseries]
-ブランチは、
+ブランチは、主に最新のcommitを追っていくためのlabelのようなもの。
+branchは追っていったcommitのcommit履歴を情報として持っている。
 \tcblower
 HP:\ \url{https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell}
 \end{tcolorbox}
 
+よく知られたbranchには以下のようなものがある。
+\begin{tcolorbox}[colframe=Cyan]
+    \begin{itemize}
+        \item \textbtt{master }: 本番(リリース)用ブランチ
+        \item \textbtt{develop}: 開発用ブランチ(source branch: master)
+        \item \textbtt{feature}: 実際に(source branch: develop)
+        \item \textbtt{hotfix }: 緊急性の高いbugの修正を行う際に使用
+        \item \textbtt{release}: リリース準備用のbranch(source branch: develop)
+    \end{itemize}
+\end{tcolorbox}
+
+% subsubsection what_is_branch_ (end)
+\subsubsection{branchの種類} % (fold)
+\label{ssub:branchの種類}
+
 \begin{oceanbox}{branchの種類}
-branchには大きく、local branch, remote-tracking branch, remote branchの３種がある。
+Gitにおけるbranchには大きく、local branch, remote-tracking branch, remote branchの３種がある。
 \end{oceanbox}
 
 
-ブランチの種類
-\begin{tcolorbox}[colframe=Cyan]
-  \begin{multicols}{2}
-    \begin{itemize}
-        \item \textbtt{master}
-        \item \textbtt{develop}
-        \item \textbtt{feature}
-        \item \textbtt{hotfix}
-        \item \textbtt{release}
-    \end{itemize}
-  \end{multicols}
-\end{tcolorbox}
+\textbtt{local branch}
+\begin{ColorReferenceBox}{green}
+
+3.1 Git Branching - Branches in a Nutshell\\
+\url{https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell}\\
+\\
+A branch in Git is simply a lightweight movable pointer to one of these commits. The default branch name in Git is master. As you start making commits, you’re given a master branch that points to the last commit you made. Every time you commit, the master branch pointer moves forward automatically.
+
+\end{ColorReferenceBox}
 
 
 \textbtt{remote branch}
@@ -79,14 +126,25 @@ branchには大きく、local branch, remote-tracking branch, remote branchの�
 3.5 Git Branching - Remote Branches\\
 \url{https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches}\\
 \\
-Remote references are references (pointers) in your remote repositories, including branches, tags, and so on. You can get a full list of remote references explicitly with git ls-remote <remote>, or git remote show <remote> for remote branches as well as more information. Nevertheless, a more common way is to take advantage of remote-tracking branches.\\
-\\
-Remote-tracking branches are references to the state of remote branches. They’re local references that you can’t move; Git moves them for you whenever you do any network communication, to make sure they accurately represent the state of the remote repository. Think of them as bookmarks, to remind you where the branches in your remote repositories were the last time you connected to them.\\
+Remote references are references (pointers) in your remote repositories, including branches, tags, and so on. You can get a full list of remote references explicitly with git ls-remote <remote>, or git remote show <remote> for remote branches as well as more information. Nevertheless, a more common way is to take advantage of remote-tracking branches.
+
 \end{ColorReferenceBox}
+
 
 \textbtt{remote-tracking branch}
 \begin{ColorReferenceBox}{red}
 3.5 Git Branching - Remote Branches\\
+\\
+Remote-tracking branches are references to the state of remote branches. They’re local references that you can’t move; Git moves them for you whenever you do any network communication, to make sure they accurately represent the state of the remote repository. Think of them as bookmarks, to remind you where the branches in your remote repositories were the last time you connected to them.\\
+
+\end{ColorReferenceBox}
+
+% subsubsection branchの種類 (end)
+\subsubsection{tracking branchとupstream branch} % (fold)
+\label{ssub:tracking_branchとupstream_branch}
+
+
+\begin{ColorReferenceBox}{red}
 \textbtt{Tracking Branches}\\
 Checking out a local branch from a remote-tracking branch automatically creates what is called a “tracking branch” (and the branch it tracks is called an “upstream branch”). Tracking branches are local branches that have a direct relationship to a remote branch. If you’re on a tracking branch and type git pull, Git automatically knows which server to fetch from and which branch to merge in.\\
 \\
@@ -99,13 +157,12 @@ Switched to a new branch 'serverfix'
 \end{onecommandshell}
 \end{ColorReferenceBox}
 
-
 \begin{tcolorbox}[enhanced,frame style image=blueshade.png,
 opacityback=0.75,opacitybacktitle=0.25,
 colback=blue!5!white,colframe=blue!75!black,
 boxrule=1.0mm, title=上流ブランチ/下流ブランチ]
 upstream branch(上流ブランチ)とは、リモート側との〜。\par
-Title and interior are made partly transparent to show the image.
+
 \end{tcolorbox}
 
 
@@ -119,6 +176,7 @@ git branch -vv
 git push --set-upstream origin feature/exampleBranch
 \end{commandshell}
 
+% subsubsection tracking_branchとupstream_branch (end)
 
 % subsection branch (end)branchとは
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -127,7 +185,8 @@ git push --set-upstream origin feature/exampleBranch
 
 \begin{tcolorbox}[enhanced,title=indexとは,watermark graphics=./figure/clock.jpg,
 watermark opacity=0.1,watermark text app=Git ,watermark color=Gray]
-インデックスとは、
+indexとは、cacheのようなもの。次のcommit対象となるファイルの一時保管場所。\\
+commitする場合には、まずindexに管理対象のファイルを登録する。
 \end{tcolorbox}
 
 % subsection index (end)
