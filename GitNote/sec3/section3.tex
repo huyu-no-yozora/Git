@@ -110,9 +110,6 @@ git add .
 \end{commandshell}
 
 
-※
-
-
 % subsubsection step1_add_indexに登録する (end)
 \subsubsection{Step2. commit - indexに変更を反映する} % (fold)
 \label{ssub:step2_commit_indexに変更を反映する}
@@ -166,9 +163,22 @@ git push origin [local branch name]:[remote branch name]
 \subsubsection{リモートの変更内容の反映} % (fold)
 \label{ssub:リモートの変更内容の反映}
 
+
 \begin{commandshell}
 git pull
 \end{commandshell}
+remote repositoryに変更内容をアップロードする際には、事前に上記コマンドを実行する。
+その後、origin/develop の最新commitが、自分がこれからremote repositoryに対して
+送信/更新するブランチのsource commitより先に進んでいるか確認する。\\
+なお、pullは、裏側の処理としてはfetch
+\footnote{
+fetchについては、remote repositoryから対象ブランチの最新までの変更内容を
+ダウンロードするためのオペレーション（コマンド）である。\\
+fetch: \url{https://git-scm.com/docs/git-fetch}\\
+このドキュメントはintroductionの範囲内での記載に留めるため、
+fetchについては、このドキュメントでは取り扱わないものとする。
+}
+とmergeとの組み合わせである。
 
 % subsubsection リモートの変更内容の反映 (end)
 \subsubsection{状態の確認} % (fold)
