@@ -8,7 +8,7 @@
 | item      | explanation            |
 | --------- | ---------------------- |
 | [README.md](README.md) | Guide this documents   |
-| [Git Note/](GitNote/)  | An Introduction to Git |
+| [GitNote/](GitNote/)   | An Introduction to Git |
 
 
 ## License
