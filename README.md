@@ -3,8 +3,12 @@
 ## Contents
 | item      | explanation            |
 | --------- | ---------------------- |
-| README.md | Guide this documents   |
-| Git Note/ | An Introduction to Git |
+| [README.md](README.md) | Guide this documents   |
+| [Git Note/](GitNote/)  | An Introduction to Git |
+
+
+## License
+The scripts and documentation in this repository are released under the [MIT License](LICENSE).
 
 
 
