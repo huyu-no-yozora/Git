@@ -84,6 +84,6 @@ jobs:
           destination-username: 'huyu-no-yozora'
           destination-repository: 'TechNotes'
           user-email: '60916159+huyu-no-yozora@users.noreply.github.com'
-          target-directory: 'GitNote'
+          target-directory: 'Git'
 
         
