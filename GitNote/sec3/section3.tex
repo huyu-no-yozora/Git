@@ -374,19 +374,31 @@ git merge [target branch]
 
 
 \begin{oceanbox}{3 way - merge と fast forward merge の使い分け}
-3 way - merge is suitable for ...\\
-fast forward merge is good at ...
+fast forward merge を統合ブランチに対して実施すると、そのブランチのcommit logに対して、
+統合されるbranchで行なった一つ一つの細かいcommit履歴(およびコメント)がそのまま取り込まれてしまう。
+一方、3 way - merge を使用すると、mergeされるbranch内部のcommit履歴の一つ一つが表示されないようにできる。
 \tcblower
-Note that ...
+統合branchとのmergeを行う際には、3 way - merge を使用することを推奨する。
 \end{oceanbox}
 
 
 \begin{oceanbox}{rebase と merge の使い分け}
-Rebase is suitable for ...\\
-Merge is good at ...
+Mergeは、現在checkoutしているbranchに別のbranchの変更内容を取り込むことができる。
+但し、merge単体での運用だと、mergeするまでの時間が長いほど、
+そのbranchで行なった作業のcommit履歴同士が離れていくので、導入した作業の内容や流れが追いにくくなる。\\
+Rebaseは、リモート側の最新を取得(featch / pull)した上で、
+source branchが進んでいたら、その最新のcommitに対して新しく自分の行なった変更を付け足していく。
+そのため、自身の行なった作業のcommit(メッセージ)が連続して(作業内容が1箇所にまとまって)表示されるため、
+commit graphが綺麗になる。
 \tcblower
-Note that ...
+その時々で、「シンプルなcommit graphを作るために、今の場合
+mergeとrebaseのどちらを使うべきだろう」という視点で考えるようにすると良いだろう。
 \end{oceanbox}
+
+以下のような運用をお勧めする。\\
+基本的にはremoteにbranchをpushする前に、remoteの変更内容を取得し、
+rebaseを行なってから、pushするようにする。
+
 
 % subsubsection merge (end)
 \subsubsection{コミットメッセージの変更} % (fold)
