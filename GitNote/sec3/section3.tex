@@ -401,6 +401,14 @@ rebaseを行なってから、pushするようにする。
 
 
 % subsubsection merge (end)
+
+
+% subsection その他の使用頻度の高いコマンド (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{コミット関連の整理} % (fold)
+\label{sub:コミット関連の整理}
+
+
 \subsubsection{コミットメッセージの変更} % (fold)
 \label{ssub:コミットメッセージの変更}
 
@@ -440,6 +448,67 @@ Step5. git logを実行し、変更が反映されていることを確認する
 
 
 % subsubsection コミットメッセージの変更 (end)
+\subsubsection{コミット内容の確認} % (fold)
+\label{ssub:コミット内容の確認}
+
+特定のcommitの変更内容を表示するには、以下のような形で実行する。
+\begin{commandshell}
+git show [commit id]
+\end{commandshell}
+
+最新のcommitの内容を確認・表示するには、以下のようにすれば良い。
+\begin{commandshell}
+git show HEAD
+\end{commandshell}
+
+% subsubsection コミット内容の確認 (end)
+\subsubsection{コミットの統合} % (fold)
+\label{ssub:コミットの統合}
+
+現在checkoutしているbranchにてコミットの統合を行う場合、git rebaseコマンドを使用して統合する。
+
+\begin{tcolorbox}[skin=enhanced,
+left=3mm,right=3mm,top=1mm,bottom=1mm, boxrule=1.0mm, 
+title=rebaseを使用したコミットの統合, coltitle=black, fonttitle=\bfseries, 
+colback=SpringGreen!5!white,colframe=SpringGreen!70]
+n個前までのコミットをまとめたいとする。\\
+\\
+Step1. 変更対象のbranchにcheckoutし、以下を実行する
+\begin{commandshell}
+git rebase --interactive HEAD~n
+\end{commandshell}
+
+Step2. 統合先のコミット(初めのコミット)は「pick」のまま、統合対象のcommit idの隣の「pick」を「s」に書き換え\\
+\\
+Step3. 統合した際のcommit messageとして、コミットメッセージを修正する\\
+\\
+Step4. git logを実行し、変更が反映されていることを確認する
+\end{tcolorbox}
+
+その他、merge時にコミットを統合することもできる。
+\begin{commandshell}
+git merge --squash [merged branch]
+\end{commandshell}
+
+
+% subsubsection コミットの統合 (end)
+
+
+% subsection コミット関連の整理 (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{ブランチの整理} % (fold)
+\label{sub:ブランチの整理}
+
+\subsubsection{ブランチの確認} % (fold)
+\label{ssub:ブランチの確認}
+
+以下コマンドで、local repositoryのブランチを確認できる。
+\begin{commandshell}
+git branch -a
+\end{commandshell}
+
+
+% subsubsection ブランチの確認 (end)
 \subsubsection{ブランチの削除} % (fold)
 \label{ssub:ブランチの削除}
 
@@ -453,7 +522,7 @@ git branch -D [target branch]   # by force
 % subsubsection ブランチの削除 (end)
 
 
-% subsection その他の使用頻度の高いコマンド (end)
+% subsection ブランチの整理 (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
