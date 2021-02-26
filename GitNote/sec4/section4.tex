@@ -95,6 +95,52 @@ git commit --interactive
 
 % subsection 役に立つコマンド (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{rebaseの色々} % (fold)
+\label{sub:rebaseの色々}
+
+\subsubsection{merge commitを含めてrebase} % (fold)
+\label{ssub:merge_commitを含めてrebase}
+
+単純な\commandbox{git rebase -i} だとマージコミットを含めずにrebaseを行うことになり、
+rebase後にはmerge commitが消えてしまう。
+これに対処するためには、--rebase-merges オプションを使用する。
+\begin{commandshell}
+git rebase -i --rebase-merges HEAD~n
+\end{commandshell}
+但し、マージコミットのブランチ名などは失われてしまうことに注意。
+
+% subsubsection merge_commitを含めてrebase (end)
+\subsubsection{commit, branchの移動} % (fold)
+\label{ssub:commit_branchの移動}
+
+srcからend-revまでのcommit(但し、srcのcommitは含まれない)をdestinationに対して移動する。
+\begin{commandshell}
+git rebase --onto=destination src end-rev
+\end{commandshell}
+※src, end-rev, destinationはrevisionを指定\\
+
+もとのcommitを維持したい場合(移動ではなく、付与)は、cherry-pickを使用する。\\
+誤って、\commandbox{\$ git rebase --onto=destination end-rev}とすると、
+srcや、それ以前のコミットなども含まれてしまうので注意！
+
+% subsubsection commit_branchの移動 (end)
+\subsubsection{過去のコミットの改変} % (fold)
+\label{ssub:過去のコミットの改変}
+
+\begin{commandshell}
+git rebase -i HEAD~n
+\end{commandshell}
+対象のコミットを pick $\rightarrow$ edit に編集し、変更したい作業を実施する。
+\begin{commandshell}
+git add .
+git commit --amend
+git rebase --continue
+\end{commandshell}
+
+% subsubsection 過去のコミットの改変 (end)
+
+% subsection rebaseの色々 (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{もっと学びたい方へ} % (fold)
 \label{sub:もっと学びたい方へ}
 
